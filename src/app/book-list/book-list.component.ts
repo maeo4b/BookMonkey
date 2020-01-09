@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Book } from '../shared/book';
 
 @Component({
@@ -29,7 +28,7 @@ export class BookListComponent implements OnInit {
       },
       {
         isbn: '9783864903274',
-        title: 'REact',
+        title: 'React',
         authors: ['Oliver Zeigermann', 'Nils Hartmann'],
         published: new Date(2016, 6, 17),
         subtitle: 'Die praktische Einführung in React, React Router und Redux',
