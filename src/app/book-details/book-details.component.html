@@ -1,4 +1,4 @@
-<div *ngIf="book">
+<div *ngIf="book; else loading">
   <h1>{{ book.title }}</h1>
   <h3 *ngIf="book.subtitle">{{ book.subtitle }}</h3>
   <div class="ui divider"></div>
@@ -19,16 +19,20 @@
     </div>
     <div class="four wide column">
       <h4>Rating</h4>
-      <i class="yellow star icon"
-         *ngFor="let rating of getRating(book.rating)"></i>
-      <i class="star outline icon"
-         *ngFor="let rest of getRating(5 - book.rating)"></i>
+      <i class="yellow star icon" *ngFor="let rating of getRating(book.rating)"></i>
+      <i class="star outline icon" *ngFor="let rest of getRating(5 - book.rating)"></i>
     </div>
   </div>
   <h4>Beschreibung</h4>
   <p>{{ book.description }}</p>
   <div class="ui small images">
-    <img *ngFor="let thumbnail of book.thumbnails"
-         [src]="thumbnail.url">
+    <img *ngFor="let thumbnail of book.thumbnails" [src]="thumbnail.url">
   </div>
+  <button class="ui tiny red labled icon button" (click)="removeBook()">
+    <i class="remove icon"></i> Buch löschen
+  </button>
 </div>
+
+<ng-template #loading>
+  <div class="ui active centered inline loader"></div>
+</ng-template>

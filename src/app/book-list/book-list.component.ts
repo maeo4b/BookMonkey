@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Book } from '../shared/book';
 import { BookStoreService } from '../shared/book-store.service';
 
@@ -14,6 +13,6 @@ export class BookListComponent implements OnInit {
   constructor(private bookStore: BookStoreService) { }
 
   ngOnInit() {
-    this.books = this.bookStore.getAll();
+    this.bookStore.getAll().subscribe(books => { this.books = books; });
   }
 }
