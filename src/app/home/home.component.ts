@@ -1,5 +1,5 @@
-import { interval, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
@@ -13,9 +13,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor() { }
 
   ngOnInit() {
-    interval(1000).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(e => console.log(e));
   }
 
   ngOnDestroy() {
