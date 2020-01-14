@@ -2,32 +2,44 @@
       class="ui form"
       (ngSubmit)="submitForm()">
   <label>Buchtitle</label>
-  <input name="title"
+  <input #titleInput="ngModel"
+         name="title"
          [(ngModel)]="book.title"
          required>
+  <bm-form-messages [control]="titleInput"
+                    controlName="title"></bm-form-messages>
 
   <label>Untertitel</label>
   <input name="subtitle"
          [(ngModel)]="book.subtitle">
 
   <label>ISBN</label>
-  <input name="isbn"
+  <input #isbnInput="ngModel"
+         name="isbn"
          [(ngModel)]="book.isbn"
          required
          minlength="10"
          maxlength="13">
+  <bm-form-messages [control]="isbnInput"
+                    controlName="isbn"></bm-form-messages>
 
   <label>Erscheinungsdatum</label>
-  <input type="date"
+  <input #dateInput="ngModel"
+         type="date"
          name="published"
          [(ngModel)]="book.published"
          useValueAsDate
          required>
+  <bm-form-messages [control]="dateInput"
+                    controlName="date"></bm-form-messages>
 
   <label>Autor</label>
-  <input name="authors"
+  <input #authorInput="ngModel"
+         name="authors"
          [(ngModel)]="book.authors[0]"
          required>
+  <bm-form-messages [control]="authorInput"
+                    controlName="author"></bm-form-messages>
 
   <label>Beschreibung</label>
   <textarea name="description"

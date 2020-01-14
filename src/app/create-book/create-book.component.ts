@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { Book } from '../shared/book';
+import { BookStoreService } from '../shared/book-store.service';
 
 @Component({
   selector: 'bm-create-book',
@@ -7,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateBookComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private bsService: BookStoreService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  createBook(book: Book) {
+    this.bsService.create(book).subscribe(() => {
+      this.router.navigate(['../..', 'books'], { relativeTo: this.route });
+    });
   }
 
 }

@@ -15,12 +15,12 @@ export class BookDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private bookStore: BookStoreService
+    private bsService: BookStoreService
   ) { }
 
   ngOnInit() {
     const isbn = this.route.snapshot.paramMap.get('isbn');
-    this.bookStore.getSingle(isbn).subscribe(book => { this.book = book; });
+    this.bsService.getSingle(isbn).subscribe(book => { this.book = book; });
   }
 
   getRating(num: number): Array<number> {
@@ -29,7 +29,7 @@ export class BookDetailsComponent implements OnInit {
 
   removeBook() {
     if (confirm('Buch wirklich löschen?')) {
-      this.bookStore.remove(this.book.isbn)
+      this.bsService.remove(this.book.isbn)
         .subscribe(
           () => this.router.navigate(
             ['../'],

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
+import { Book } from '../shared/book';
 import { BookFactory } from '../shared/book-factory';
 
 @Component({
@@ -7,12 +9,16 @@ import { BookFactory } from '../shared/book-factory';
   templateUrl: './book-form.component.html',
   styleUrls: ['./book-form.component.css']
 })
-export class BookFormComponent implements OnInit {
+export class BookFormComponent {
+  @Output() submitBook = new EventEmitter<Book>();
+  @ViewChild('bookForm', { static: true }) bookForm: NgForm;
+
   book = BookFactory.empty();
 
-  constructor() { }
+  submitForm() {
+    this.submitBook.emit(this.book);
 
-  ngOnInit() {
+    this.bookForm.reset();
+    this.book = BookFactory.empty();
   }
-
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Book } from '../shared/book';
 import { BookStoreService } from '../shared/book-store.service';
 
@@ -10,9 +11,9 @@ import { BookStoreService } from '../shared/book-store.service';
 export class BookListComponent implements OnInit {
   books: Book[];
 
-  constructor(private bookStore: BookStoreService) { }
+  constructor(private bsService: BookStoreService) { }
 
   ngOnInit() {
-    this.bookStore.getAll().subscribe(books => { this.books = books; });
+    this.bsService.getAll().subscribe(books => { this.books = books; });
   }
 }

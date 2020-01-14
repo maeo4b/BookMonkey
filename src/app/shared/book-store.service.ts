@@ -17,6 +17,12 @@ export class BookStoreService {
   constructor(private http: HttpClient) {
   }
 
+  create(book: Book): Observable<any> {
+    return this.http.post(`${this.api}/book`, book, { responseType: 'text' }).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
   getAll(): Observable<Book[]> {
     return this.http.get<BookRaw[]>(`${this.api}/books`).pipe(
       retry(2),
@@ -34,15 +40,17 @@ export class BookStoreService {
     );
   }
 
-  remove(isbn: string): Observable<any> {
-    return this.http.delete(`${this.api}/book/${isbn}`, { responseType: 'text' });
-  }
-
   getAllSearch(searchTerm: string): Observable<Book[]> {
     return this.http.get<BookRaw[]>(`${this.api}/books/search/${searchTerm}`).pipe(
       retry(2),
       map(booksRaw =>
         booksRaw.map(bookRaw => BookFactory.fromRaw(bookRaw))),
+      catchError(this.errorHandler)
+    );
+  }
+
+  remove(isbn: string): Observable<any> {
+    return this.http.delete(`${this.api}/book/${isbn}`, { responseType: 'text' }).pipe(
       catchError(this.errorHandler)
     );
   }
